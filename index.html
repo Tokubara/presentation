@@ -9,55 +9,55 @@
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
-<link rel="stylesheet" href="file:///Users/quebec/resources/reveal.js-master/dist/reveal.css"/>
+<link rel="stylesheet" href="./dist/reveal.css"/>
 
-<link rel="stylesheet" href="file:///Users/quebec/resources/reveal.js-master/dist/theme/white.css" id="theme"/>
+<link rel="stylesheet" href="./dist/theme/white.css" id="theme"/>
 
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide"><h1 class="title">a short tour of asymmetric cryptography from certificate</h1><p class="subtitle"></p>
-<h2 class="author">Tian Zhuoyu</h2><p class="date">Created: 2023-06-19 Mon 11:23</p>
+<h2 class="author">Tian Zhuoyu</h2><p class="date">Created: 2023-06-19 Mon 11:33</p>
 </section>
 <section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#/slide-orgc165bb7">situation</a>
+<li><a href="#/slide-orga2a8908">situation</a>
 <ul>
-<li><a href="#/slide-org560c9d9">The problem: Your connection is not private</a></li>
-<li><a href="#/slide-orgad030a5">Certicate is not valid</a></li>
+<li><a href="#/slide-orgbe2c755">The problem: Your connection is not private</a></li>
+<li><a href="#/slide-orgd140196">Certicate is not valid</a></li>
 </ul>
 </li>
-<li><a href="#/slide-org4f3f127">asymmetric encryption</a>
+<li><a href="#/slide-org97b0a7f">asymmetric encryption</a>
 <ul>
-<li><a href="#/slide-org7338244">Why do we need encryption?</a></li>
-<li><a href="#/slide-org82dd0ce">symmetric encryption</a></li>
-<li><a href="#/slide-orgf3992b2">Asymmetric encryption</a></li>
+<li><a href="#/slide-org0cc645c">Why do we need encryption?</a></li>
+<li><a href="#/slide-org856a6a4">symmetric encryption</a></li>
+<li><a href="#/slide-org1a4cbbd">Asymmetric encryption</a></li>
 </ul>
 </li>
-<li><a href="#/slide-org0095405">Problem with asymmetric encryption: MITM</a>
+<li><a href="#/slide-org086ebed">Problem with asymmetric encryption: MITM</a>
 <ul>
-<li><a href="#/slide-org45432a4">things are not perfect</a></li>
-<li><a href="#/slide-org029cd4a">example</a></li>
-<li><a href="#/slide-orgd66f946">the problem</a></li>
+<li><a href="#/slide-org7c00d8e">things are not perfect</a></li>
+<li><a href="#/slide-org9c47a3b">example</a></li>
+<li><a href="#/slide-orgfd0e520">the problem</a></li>
 </ul>
 </li>
-<li><a href="#/slide-org3cd9ad3">CA and digital certificates</a>
+<li><a href="#/slide-org03ca7a1">CA and digital certificates</a>
 <ul>
-<li><a href="#/slide-org0f9660a">certificate</a></li>
-<li><a href="#/slide-org849ca91">now</a></li>
+<li><a href="#/slide-org2d25f5a">certificate</a></li>
+<li><a href="#/slide-org29da673">now</a></li>
 </ul>
 </li>
-<li><a href="#/slide-org3f455d1">back to the website</a></li>
+<li><a href="#/slide-orgd631ecf">back to the website</a></li>
 </ul>
 </div>
 </div>
 </section>
 <section>
-<section id="slide-orgc165bb7">
-<h2 id="orgc165bb7">situation</h2>
+<section id="slide-orga2a8908">
+<h2 id="orga2a8908">situation</h2>
 <aside class="notes">
 <p>
 Let's start with a situation.
@@ -66,10 +66,10 @@ Let's start with a situation.
 </aside>
 
 </section>
-<section id="slide-org560c9d9">
-<h3 id="org560c9d9">The problem: Your connection is not private</h3>
+<section id="slide-orgbe2c755">
+<h3 id="orgbe2c755">The problem: Your connection is not private</h3>
 
-<div id="org9922f8c" class="figure">
+<div id="org7c792fd" class="figure">
 <p><img src="img/Pasted_image_20230618190223.png" alt="Pasted_image_20230618190223.png" />
 </p>
 </div>
@@ -86,10 +86,10 @@ I guess most of you have encountered a situation like this before: you enter a U
 </aside>
 
 </section>
-<section id="slide-orgad030a5">
-<h3 id="orgad030a5">Certicate is not valid</h3>
+<section id="slide-orgd140196">
+<h3 id="orgd140196">Certicate is not valid</h3>
 
-<div id="org4b66f1b" class="figure">
+<div id="orgd489539" class="figure">
 <p><img src="img/Pasted_image_20230618192459.png" alt="Pasted_image_20230618192459.png" />
 </p>
 </div>
@@ -119,8 +119,8 @@ This is my topic. I'll try to explain what is a certificate, explain why some we
 </section>
 </section>
 <section>
-<section id="slide-org4f3f127">
-<h2 id="org4f3f127">asymmetric encryption</h2>
+<section id="slide-org97b0a7f">
+<h2 id="org97b0a7f">asymmetric encryption</h2>
 <aside class="notes">
 <p>
 Certificates is to solve some issues in asymmetric encryption. Therefore, I will first provide a brief introduction to asymmetric encryption.
@@ -129,10 +129,10 @@ Certificates is to solve some issues in asymmetric encryption. Therefore, I will
 </aside>
 
 </section>
-<section id="slide-org7338244">
-<h3 id="org7338244">Why do we need encryption?</h3>
+<section id="slide-org0cc645c">
+<h3 id="org0cc645c">Why do we need encryption?</h3>
 
-<div id="org6625d3c" class="figure">
+<div id="org727d8d8" class="figure">
 <p><img src="img/Pasted_image_20230618201349.png" alt="Pasted_image_20230618201349.png" />
 </p>
 </div>
@@ -166,10 +166,10 @@ Before Alice sends a message to Bob, she encrypts the message to create cipherte
 </aside>
 
 </section>
-<section id="slide-org82dd0ce">
-<h3 id="org82dd0ce">symmetric encryption</h3>
+<section id="slide-org856a6a4">
+<h3 id="org856a6a4">symmetric encryption</h3>
 
-<div id="orgd95a60f" class="figure">
+<div id="orgf99058b" class="figure">
 <p><img src="img/Pasted_image_20230618204353.png" alt="Pasted_image_20230618204353.png" width="45%" align="center" />
 </p>
 </div>
@@ -191,8 +191,8 @@ Before asymmetric encryption was introduced, there was only symmetric encryption
 </aside>
 
 </section>
-<section id="slide-orgf3992b2">
-<h3 id="orgf3992b2">Asymmetric encryption</h3>
+<section id="slide-org1a4cbbd">
+<h3 id="org1a4cbbd">Asymmetric encryption</h3>
 <p>
 Asymmetric encryption uses key pairs for encryption and decryption. key pair=(public key, private key).
 </p>
@@ -202,7 +202,7 @@ The public key is used for encryption, and the private key is used for decryptio
 </p>
 
 
-<div id="org19f9247" class="figure">
+<div id="orgd7e8368" class="figure">
 <p><img src="img/Pasted_image_20230619093338.png" alt="Pasted_image_20230619093338.png" />
 </p>
 </div>
@@ -227,7 +227,7 @@ Even if the public key is intercepted by Eve, it doesn't matter because public k
 </aside>
 
 </section>
-<section id="slide-orgf3992b2-split">
+<section id="slide-org1a4cbbd-split">
 
 <p>
 In asymmetric encryption, there's no need to distribute the private key, and there's no need to worry about the public key being intercepted.
@@ -241,7 +241,7 @@ Therefore, in asymmetric encryption, there's no need to distribute the private k
 </aside>
 
 
-<div id="orge982463" class="figure">
+<div id="orgfd17877" class="figure">
 <p><img src="img/Pasted_image_20230618204948.png" alt="Pasted_image_20230618204948.png" width="45%" align="center" />
 </p>
 </div>
@@ -256,8 +256,8 @@ The picture emphasizes that in asymmetric encryption, the keys used for encrypti
 </section>
 </section>
 <section>
-<section id="slide-org0095405">
-<h2 id="org0095405">Problem with asymmetric encryption: MITM</h2>
+<section id="slide-org086ebed">
+<h2 id="org086ebed">Problem with asymmetric encryption: MITM</h2>
 <aside class="notes">
 <p>
 Sounds perfect, right? Not that perfect.
@@ -266,10 +266,10 @@ Sounds perfect, right? Not that perfect.
 </aside>
 
 </section>
-<section id="slide-org45432a4">
-<h3 id="org45432a4">things are not perfect</h3>
+<section id="slide-org7c00d8e">
+<h3 id="org7c00d8e">things are not perfect</h3>
 
-<div id="org61a02ac" class="figure">
+<div id="org20fe0be" class="figure">
 <p><img src="img/Pasted_image_20220920204326.png" alt="Pasted_image_20220920204326.png" />
 </p>
 </div>
@@ -286,10 +286,10 @@ Asymmetric encryption poses a potential risk of man-in-the-middle attacks. Let m
 </aside>
 
 </section>
-<section id="slide-org029cd4a">
-<h3 id="org029cd4a">example</h3>
+<section id="slide-org9c47a3b">
+<h3 id="org9c47a3b">example</h3>
 
-<div id="orgb8df7c3" class="figure">
+<div id="org8a06a15" class="figure">
 <p><img src="../vx_attachments/Pasted_image_20230618212403.svg" alt="Pasted_image_20230618212403.svg" class="org-svg" />
 </p>
 </div>
@@ -301,10 +301,10 @@ It is supposed to be that Alice sends her public key to Bob, and Bob sends his p
 </aside>
 
 </section>
-<section id="slide-org029cd4a-split">
+<section id="slide-org9c47a3b-split">
 
 
-<div id="org616babb" class="figure">
+<div id="orgb64b2da" class="figure">
 <p><img src="../vx_attachments/Pasted_image_20230618210943.svg" alt="Pasted_image_20230618210943.svg" class="org-svg" />
 </p>
 </div>
@@ -317,8 +317,8 @@ But now there is a man in the middle Eve. When Alice sends her public key to Bob
 </aside>
 
 </section>
-<section id="slide-orgd66f946">
-<h3 id="orgd66f946">the problem</h3>
+<section id="slide-orgfd0e520">
+<h3 id="orgfd0e520">the problem</h3>
 <p>
 When you receive a public key claiming to be Alice's, how can you make sure it is actually Alice's public key and not the public key of a man-in-the-middle attacker?
 </p>
@@ -337,13 +337,13 @@ The problem is, when you receive a public key claiming to be Alice's, how can yo
 </section>
 </section>
 <section>
-<section id="slide-org3cd9ad3">
-<h2 id="org3cd9ad3">CA and digital certificates</h2>
-<div class="outline-text-2" id="text-org3cd9ad3">
+<section id="slide-org03ca7a1">
+<h2 id="org03ca7a1">CA and digital certificates</h2>
+<div class="outline-text-2" id="text-org03ca7a1">
 </div>
 </section>
-<section id="slide-org0f9660a">
-<h3 id="org0f9660a">certificate</h3>
+<section id="slide-org2d25f5a">
+<h3 id="org2d25f5a">certificate</h3>
 <p>
 certificate=subject's public key+digital signature of CA (Certificate Authority)
 </p>
@@ -380,7 +380,7 @@ A very appropriate analogy is a driver's license. Just as the transportation dep
 </aside>
 
 
-<div id="orgc71527d" class="figure">
+<div id="org68cde43" class="figure">
 <p><img src="img/Pasted_image_20230618214452.png" alt="Pasted_image_20230618214452.png" width="45%" align="center" />
 </p>
 </div>
@@ -392,14 +392,14 @@ As shown in this image, the CA issues a certificate that contains Jane Doe's pub
 
 </aside>
 </section>
-<section id="slide-org849ca91">
-<h3 id="org849ca91">now</h3>
+<section id="slide-org29da673">
+<h3 id="org29da673">now</h3>
 <p>
 Now instead of sending public keys, they send their own certficates.
 </p>
 
 
-<div id="org55b2a39" class="figure">
+<div id="org259ae44" class="figure">
 <p><img src="img/Pasted_image_20230618230110.svg" alt="Pasted_image_20230618230110.svg" class="org-svg" width="45%" align="center" />
 </p>
 </div>
@@ -408,7 +408,7 @@ Now instead of sending public keys, they send their own certficates.
 Even if Eve intercepts the certificates, she can do nothing.
 </p>
 
-<div id="org0fe882d" class="figure">
+<div id="org7406791" class="figure">
 <p><img src="img/Pasted_image_20230618230134.svg" alt="Pasted_image_20230618230134.svg" class="org-svg" width="45%" align="center" />
 </p>
 </div>
@@ -423,10 +423,10 @@ Now, Alice and Bob are sending their respective certificates to each other inste
 </section>
 </section>
 <section>
-<section id="slide-org3f455d1">
-<h2 id="org3f455d1">back to the website</h2>
+<section id="slide-orgd631ecf">
+<h2 id="orgd631ecf">back to the website</h2>
 
-<div id="org95723e8" class="figure">
+<div id="org2ce8f04" class="figure">
 <p><img src="img/Pasted_image_20230618192459.png" alt="Pasted_image_20230618192459.png" width="30%" align="center" />
 </p>
 </div>
@@ -449,10 +449,10 @@ Now back to our example, what does "Certificate is not valid" mean? It means tha
 </section>
 </div>
 </div>
-<script src="/Users/quebec/resources/reveal.js-master/dist/reveal.js"></script>
-<script src="file:///Users/quebec/resources/reveal.js-master/plugin/markdown/markdown.js"></script>
-<script src="file:///Users/quebec/resources/reveal.js-master/plugin/zoom/zoom.js"></script>
-<script src="file:///Users/quebec/resources/reveal.js-master/plugin/notes/notes.js"></script>
+<script src="./dist/reveal.js"></script>
+<script src="./plugin/markdown/markdown.js"></script>
+<script src="./plugin/zoom/zoom.js"></script>
+<script src="./plugin/notes/notes.js"></script>
 
 
 <script>
