@@ -2,12 +2,11 @@
 #+LANGUAGE: en
 #+OPTIONS: num:nil date:t toc:t author:t ^:{}
 #+AUTHOR: Tian Zhuoyu
-#+REVEAL_ROOT: file:///Users/quebec/resources/reveal.js-master
+#+REVEAL_ROOT: .
 
-** 学术写作和演讲技巧
 *** a short tour of asymmetric cryptography from certificates
 :PROPERTIES:
-:EXPORT_FILE_NAME: pre
+:EXPORT_FILE_NAME: index.html
 :EXPORT_TITLE: a short tour of asymmetric cryptography from certificate
 :EXPORT_OPTIONS: toc:4
 :END:
@@ -132,7 +131,7 @@ Asymmetric encryption poses a potential risk of man-in-the-middle attacks. Let m
 
 ***** example
 
-#+begin_src d2 :file ../vx_attachments/Pasted_image_20230618212403.svg
+#+begin_src d2 :file ../vx_attachments/Pasted_image_20230618212403.svg :exports none
 style.fill: transparent
 direction: right
 Alice->Bob: Alice's PK
@@ -140,6 +139,7 @@ Bob->Alice: Bob's PK
 #+end_src
 
 #+RESULTS:
+
 [[file:img/Pasted_image_20230618212403.svg]]
 #+BEGIN_NOTES
 It is supposed to be that Alice sends her public key to Bob, and Bob sends his public key to Alice.
@@ -147,7 +147,7 @@ It is supposed to be that Alice sends her public key to Bob, and Bob sends his p
 
 #+REVEAL: split
 
-#+begin_src d2 :file ../vx_attachments/Pasted_image_20230618210943.svg
+#+begin_src d2 :file ../vx_attachments/Pasted_image_20230618210943.svg :exports none
 style.fill: transparent
 direction: right
 Alice -> Eve: Alice's PK
@@ -157,6 +157,7 @@ Eve -> Alice: Eve's PK
 #+end_src
 
 #+RESULTS:
+
 [[file:img/Pasted_image_20230618210943.svg]]
 
 #+BEGIN_NOTES
