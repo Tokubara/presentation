@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>a short tour of asymmetric cryptography from certificate</title>
+<meta name="author" content="Tian Zhuoyu"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="file:///Users/quebec/resources/reveal.js-master/dist/reveal.css"/>
+
+<link rel="stylesheet" href="file:///Users/quebec/resources/reveal.js-master/dist/theme/white.css" id="theme"/>
+
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">a short tour of asymmetric cryptography from certificate</h1><p class="subtitle"></p>
+<h2 class="author">Tian Zhuoyu</h2><p class="date">Created: 2023-06-19 Mon 11:23</p>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-orgc165bb7">situation</a>
+<ul>
+<li><a href="#/slide-org560c9d9">The problem: Your connection is not private</a></li>
+<li><a href="#/slide-orgad030a5">Certicate is not valid</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org4f3f127">asymmetric encryption</a>
+<ul>
+<li><a href="#/slide-org7338244">Why do we need encryption?</a></li>
+<li><a href="#/slide-org82dd0ce">symmetric encryption</a></li>
+<li><a href="#/slide-orgf3992b2">Asymmetric encryption</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org0095405">Problem with asymmetric encryption: MITM</a>
+<ul>
+<li><a href="#/slide-org45432a4">things are not perfect</a></li>
+<li><a href="#/slide-org029cd4a">example</a></li>
+<li><a href="#/slide-orgd66f946">the problem</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org3cd9ad3">CA and digital certificates</a>
+<ul>
+<li><a href="#/slide-org0f9660a">certificate</a></li>
+<li><a href="#/slide-org849ca91">now</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org3f455d1">back to the website</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section>
+<section id="slide-orgc165bb7">
+<h2 id="orgc165bb7">situation</h2>
+<aside class="notes">
+<p>
+Let's start with a situation.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org560c9d9">
+<h3 id="org560c9d9">The problem: Your connection is not private</h3>
+
+<div id="org9922f8c" class="figure">
+<p><img src="img/Pasted_image_20230618190223.png" alt="Pasted_image_20230618190223.png" />
+</p>
+</div>
+
+<p>
+For example, <a href="https://138.2.115.37/buy/5">this site</a>.
+</p>
+
+<aside class="notes">
+<p>
+I guess most of you have encountered a situation like this before: you enter a URL in your browser to open a website, but the browser tells you that the connection is not secure. Why does the browser think that the website is not secure?
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgad030a5">
+<h3 id="orgad030a5">Certicate is not valid</h3>
+
+<div id="org4b66f1b" class="figure">
+<p><img src="img/Pasted_image_20230618192459.png" alt="Pasted_image_20230618192459.png" />
+</p>
+</div>
+
+<p>
+Certificate is not valid.
+</p>
+
+<p>
+But what is a certificate?
+</p>
+
+<aside class="notes">
+<p>
+If you click here, the browser will tell you that "Certificate is not valid." But what does "Certificate is not valid" mean? What is a certificate?
+</p>
+
+</aside>
+
+<aside class="notes">
+<p>
+This is my topic. I'll try to explain what is a certificate, explain why some websites don't have certificates and what risks can be associated with accessing these sites.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org4f3f127">
+<h2 id="org4f3f127">asymmetric encryption</h2>
+<aside class="notes">
+<p>
+Certificates is to solve some issues in asymmetric encryption. Therefore, I will first provide a brief introduction to asymmetric encryption.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org7338244">
+<h3 id="org7338244">Why do we need encryption?</h3>
+
+<div id="org6625d3c" class="figure">
+<p><img src="img/Pasted_image_20230618201349.png" alt="Pasted_image_20230618201349.png" />
+</p>
+</div>
+
+
+<p>
+Why do we need encryption? Because the Internet is not secure at all.
+</p>
+
+<p>
+Let's assume that the two parties communicating are Alice and Bob, and Eve is a malicious third party trying to eavesdrop on their communication.
+</p>
+
+<p>
+Before Alice sends a message to Bob, she encrypts the message to create ciphertext. Bob decrypts the ciphertext to obtain the message after receiving it.
+</p>
+
+<aside class="notes">
+<p>
+Why do we need to encrypt data? Because the internet is not safe at all. transmitting plain text poses a risk of being intercepted, tampered and discarded. For example, you probably don't want someone else to eavesdrop on your Alipay password, right?
+</p>
+
+<p>
+For the purpose of this discussion, let's assume that the two parties communicating are Alice and Bob, and Eve is a malicious third party trying to eavesdrop on their communication.
+</p>
+
+<p>
+Before Alice sends a message to Bob, she encrypts the message to create ciphertext. Bob decrypts the ciphertext to obtain the message after receiving it. just as illustrated in this picture.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org82dd0ce">
+<h3 id="org82dd0ce">symmetric encryption</h3>
+
+<div id="orgd95a60f" class="figure">
+<p><img src="img/Pasted_image_20230618204353.png" alt="Pasted_image_20230618204353.png" width="45%" align="center" />
+</p>
+</div>
+
+
+<p>
+Symmetric encryption: encrypt and decrypt data with the same key, so the sender and receiver have the same key.
+</p>
+
+<p>
+The problem of symmetric encryption: how to transfer a key safely? That's the motivation for asymmetric encryption.
+</p>
+
+<aside class="notes">
+<p>
+Before asymmetric encryption was introduced, there was only symmetric encryption. Symmetric encryption uses a single key to encrypt and decrypt data. This key is shared between the sender and receiver. The problem is that, the secret key can be difficult to be distributed over a public network, such as the internet, because your secret key can be eavesdrop and become not secret any more. And that's the motivation of asymmetric encryption.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgf3992b2">
+<h3 id="orgf3992b2">Asymmetric encryption</h3>
+<p>
+Asymmetric encryption uses key pairs for encryption and decryption. key pair=(public key, private key).
+</p>
+
+<p>
+The public key is used for encryption, and the private key is used for decryption. Public key should be shared with senders, secret key shouldn't be told anyone.
+</p>
+
+
+<div id="org19f9247" class="figure">
+<p><img src="img/Pasted_image_20230619093338.png" alt="Pasted_image_20230619093338.png" />
+</p>
+</div>
+
+<p>
+Even if Eve intercepts public keys of Alice and Bob, it doesn't matter because public keys are used for encryption not decryption. Eve cannot intercept private keys because private keys will never be sent.
+</p>
+
+<aside class="notes">
+<p>
+Asymmetric encryption uses key pairs for encryption and decryption. A key pair consists of a public key and a private key. The public key is used for encryption, and the private key is used for decryption. Public key should be shared with senders, secret key shouldn't be told anyone.
+</p>
+
+<p>
+As shown in this picture, if Alice wants to receive a message from Bob, she sends him her public key, but never her private key. Before Bob sends a message to Alice, he encrypts it using Alice's public key, and Alice decrypts it using her private key. Even if Eve eavesdrops on the encrypted message, she can't decrypt it without Alice's private key. Similarly, if Alice wants to send a message to Bob, she needs to obtain Bob's public key first.
+</p>
+
+<p>
+Even if the public key is intercepted by Eve, it doesn't matter because public key can only be used for encryption and not decryption. Eve doesn't have Alice.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgf3992b2-split">
+
+<p>
+In asymmetric encryption, there's no need to distribute the private key, and there's no need to worry about the public key being intercepted.
+</p>
+
+<aside class="notes">
+<p>
+Therefore, in asymmetric encryption, there's no need to distribute the private key, and there's no need to worry about the public key being intercepted.
+</p>
+
+</aside>
+
+
+<div id="orge982463" class="figure">
+<p><img src="img/Pasted_image_20230618204948.png" alt="Pasted_image_20230618204948.png" width="45%" align="center" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+The picture emphasizes that in asymmetric encryption, the keys used for encryption and decryption are different.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org0095405">
+<h2 id="org0095405">Problem with asymmetric encryption: MITM</h2>
+<aside class="notes">
+<p>
+Sounds perfect, right? Not that perfect.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org45432a4">
+<h3 id="org45432a4">things are not perfect</h3>
+
+<div id="org61a02ac" class="figure">
+<p><img src="img/Pasted_image_20220920204326.png" alt="Pasted_image_20220920204326.png" />
+</p>
+</div>
+
+<p>
+Asymmetric encryption still poses a potential risk of man-in-the-middle attacks.
+</p>
+
+<aside class="notes">
+<p>
+Asymmetric encryption poses a potential risk of man-in-the-middle attacks. Let me give an example to illustrate this point.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org029cd4a">
+<h3 id="org029cd4a">example</h3>
+
+<div id="orgb8df7c3" class="figure">
+<p><img src="../vx_attachments/Pasted_image_20230618212403.svg" alt="Pasted_image_20230618212403.svg" class="org-svg" />
+</p>
+</div>
+<aside class="notes">
+<p>
+It is supposed to be that Alice sends her public key to Bob, and Bob sends his public key to Alice.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org029cd4a-split">
+
+
+<div id="org616babb" class="figure">
+<p><img src="../vx_attachments/Pasted_image_20230618210943.svg" alt="Pasted_image_20230618210943.svg" class="org-svg" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+But now there is a man in the middle Eve. When Alice sends her public key to Bob, Eve intercepts Alice's message and obtains Alice's public key, then Eve sends her own public key to Bob. Similarly, when Bob sends his public key to Alice, Eve intercepts Bob's message, obtains Bob's public key, and sends her own public key to Alice. Alice thinks she is communicating with Bob, and Bob thinks he is communicating with Alice, but in fact, they are both communicating with Eve.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orgd66f946">
+<h3 id="orgd66f946">the problem</h3>
+<p>
+When you receive a public key claiming to be Alice's, how can you make sure it is actually Alice's public key and not the public key of a man-in-the-middle attacker?
+</p>
+
+<p>
+That's when certificates come into play.
+</p>
+
+<aside class="notes">
+<p>
+The problem is, when you receive a public key claiming to be Alice's, how can you make sure it is actually Alice's public key and not the public key of a man-in-the-middle attacker? That's when certificates come into play.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org3cd9ad3">
+<h2 id="org3cd9ad3">CA and digital certificates</h2>
+<div class="outline-text-2" id="text-org3cd9ad3">
+</div>
+</section>
+<section id="slide-org0f9660a">
+<h3 id="org0f9660a">certificate</h3>
+<p>
+certificate=subject's public key+digital signature of CA (Certificate Authority)
+</p>
+
+<p>
+Digital signatures ensure the authenticity of the content of the certificate.
+</p>
+
+<p>
+The certificate proves that Alice's public key is indeed hers.
+</p>
+
+<p>
+Just like driver's license.
+</p>
+
+<aside class="notes">
+<p>
+Technically, certificates consist of the subject's public key and the issuer's digital signature.
+</p>
+
+<p>
+The digital signature is another important concept in asymmetric cryptography. Here we only need to know that with a digital signature, Bob can be sure that the certificate is issued by a trusted CA and the contents are trustworthy, rather than being forged by Eve.
+</p>
+
+<p>
+The certificate proves that Alice's public key is indeed hers.
+</p>
+
+<p>
+A very appropriate analogy is a driver's license. Just as the transportation department issues a driver's license to prove a driver's qualifications, a CA issues a certificate to ensure the authenticity of the public key.
+</p>
+
+</aside>
+
+
+<div id="orgc71527d" class="figure">
+<p><img src="img/Pasted_image_20230618214452.png" alt="Pasted_image_20230618214452.png" width="45%" align="center" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+As shown in this image, the CA issues a certificate that contains Jane Doe's public key and a digital signature from the CA.
+</p>
+
+</aside>
+</section>
+<section id="slide-org849ca91">
+<h3 id="org849ca91">now</h3>
+<p>
+Now instead of sending public keys, they send their own certficates.
+</p>
+
+
+<div id="org55b2a39" class="figure">
+<p><img src="img/Pasted_image_20230618230110.svg" alt="Pasted_image_20230618230110.svg" class="org-svg" width="45%" align="center" />
+</p>
+</div>
+
+<p>
+Even if Eve intercepts the certificates, she can do nothing.
+</p>
+
+<div id="org0fe882d" class="figure">
+<p><img src="img/Pasted_image_20230618230134.svg" alt="Pasted_image_20230618230134.svg" class="org-svg" width="45%" align="center" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Now, Alice and Bob are sending their respective certificates to each other instead of public keys. Even if Eve intercepts the certificate, she can't do anything because If Eve also has a certificate, the certificate will only show that it's Eve's public key and not Alice's. Therefore, Eve cannot impersonate Alice or Bob anymore.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org3f455d1">
+<h2 id="org3f455d1">back to the website</h2>
+
+<div id="org95723e8" class="figure">
+<p><img src="img/Pasted_image_20230618192459.png" alt="Pasted_image_20230618192459.png" width="30%" align="center" />
+</p>
+</div>
+
+<p>
+If the website do not have a certificate issued by a CA, it could be a phishing website (钓鱼网站) or a legitimate website that hasn't yet applied for a certificate from the CA
+</p>
+
+<p>
+A legitimate website without a certificate is still insecure. Your communication may be vulnerable to a man-in-the-middle attack. You should not send any sensitive information, such as passwords.
+</p>
+
+<aside class="notes">
+<p>
+Now back to our example, what does "Certificate is not valid" mean? It means that the website doesn't have a certificate issued by a CA. it could be a phishing website, such as a fake Baidu website. Alternatively, it could be a legitimate website that hasn't yet applied for a certificate from the CA. However, even if it is a legitimate website, your communication is not secure. This puts you at risk of a man-in-the-middle attack. While you think you are communicating with the website server, it is possible that you are communicating with a man-in-the-middlebut. Therefore, even if you are certain that the website is legitimate, you should not send any sensitive information, such as passwords.
+</p>
+
+</aside>
+</section>
+</section>
+</div>
+</div>
+<script src="/Users/quebec/resources/reveal.js-master/dist/reveal.js"></script>
+<script src="file:///Users/quebec/resources/reveal.js-master/plugin/markdown/markdown.js"></script>
+<script src="file:///Users/quebec/resources/reveal.js-master/plugin/zoom/zoom.js"></script>
+<script src="file:///Users/quebec/resources/reveal.js-master/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes]
+});
+
+</script>
+</body>
+</html>
